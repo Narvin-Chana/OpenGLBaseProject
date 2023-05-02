@@ -600,6 +600,8 @@
     <ClInclude Include="src\VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="imgui.ini" />
+    <Content Include="OpenGL.vcxproj.filters" />
     <Content Include="res\textures\Oranges.png" />
     <Content Include="src\vendor\glm\CMakeLists.txt" />
   </ItemGroup>
