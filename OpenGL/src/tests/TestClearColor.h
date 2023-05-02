@@ -13,7 +13,7 @@ namespace test
         void OnRender() override;
         void OnImGuiRender() override;
     private:
-        float m_ClearColor[4];
+        float clearColor[4];
     };
     
 }

@@ -4,7 +4,7 @@
 
 namespace test
 {
-    TestMenu::TestMenu(Test*& currentTestPointer) : m_CurrentTest(currentTestPointer)
+    TestMenu::TestMenu(Test*& currentTestPointer) : currentTest(currentTestPointer)
     {
     }
 
@@ -12,11 +12,11 @@ namespace test
     {
         Test::OnImGuiRender();
 
-        for (auto& test : m_Tests)
+        for (auto& test : tests)
         {
             if (ImGui::Button(test.first.c_str()))
             {
-                m_CurrentTest = test.second();
+                currentTest = test.second();
             }
         }
     }
