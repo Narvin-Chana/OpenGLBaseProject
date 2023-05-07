@@ -54,7 +54,7 @@ public:
         elements.push_back({GL_UNSIGNED_INT, count, GL_FALSE});
         stride += VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT) * count;
     }
-    
+
     template <>
     void Push<unsigned char>(const unsigned int count)
     {

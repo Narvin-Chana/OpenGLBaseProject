@@ -11,6 +11,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "tests/TestCube3D.h"
 #include "tests/TestTexture2D.h"
 
 int main()
@@ -25,7 +26,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    GLFWwindow* window = glfwCreateWindow(960, 540, "Hello World", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(960, 540, "OpenGLTests", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
@@ -61,6 +62,7 @@ int main()
 
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
+        testMenu->RegisterTest<test::TestCube3D>("Cube 3D");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
