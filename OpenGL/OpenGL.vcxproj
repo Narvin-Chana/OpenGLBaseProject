@@ -239,10 +239,6 @@
     <ClCompile Include="src\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\Basic.shader" />
-    <None Include="res\shaders\NoTex.shader" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\IndexBuffer.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Shader.h" />
@@ -686,8 +682,14 @@
   <ItemGroup>
     <Content Include="imgui.ini" />
     <Content Include="OpenGL.vcxproj.filters" />
+    <Content Include="res\shaders\NoTex.vs" />
+    <Content Include="res\shaders\Tex.vs" />
     <Content Include="res\textures\Oranges.png" />
     <Content Include="src\vendor\glm\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="res\shaders\NoTex.fs" />
+    <Compile Include="res\shaders\Tex.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

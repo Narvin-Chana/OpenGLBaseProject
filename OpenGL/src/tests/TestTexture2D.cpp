@@ -38,7 +38,7 @@ namespace test
 
         indexBuffer = std::make_unique<IndexBuffer>(indices, 6);
 
-        shader = std::make_unique<Shader>("res\\shaders\\Basic.shader");
+        shader = std::make_unique<Shader>("res\\shaders\\Tex.vs", "res\\shaders\\Tex.fs");
         shader->Bind();
 
         texture = std::make_unique<Texture>("res/textures/Oranges.png");

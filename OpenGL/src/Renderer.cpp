@@ -29,6 +29,19 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& 
     GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr))
 }
 
+void Renderer::DrawQuads(const VertexArray& va, const IndexBuffer& ib, const Shader& shader)
+{
+    // Rebind shader
+    shader.Bind();
+
+    // Bind vertex array object
+    va.Bind();
+    // Bind index buffer
+    ib.Bind();
+    // Draw quads
+    GLCall(glDrawElements(GL_QUADS, ib.GetCount(), GL_UNSIGNED_INT, nullptr))
+}
+
 void Renderer::Clear()
 {
     GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f))
