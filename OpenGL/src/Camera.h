@@ -8,6 +8,6 @@ public:
     Camera();
 
     glm::mat4 LookAt(const glm::vec3& target);
-    float cameraSpeed = 0.05f;
+    float cameraSpeed = 3.5f;
     glm::vec3 position, direction, right, up;
 };

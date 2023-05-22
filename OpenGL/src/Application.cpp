@@ -74,18 +74,24 @@ int main()
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
         testMenu->RegisterTest<test::TestCube3D>("Cube 3D");
 
+        float deltaTime;
+        float lastFrame = 0.0f;
+        
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             // Clear
             Renderer::Clear();
-
+            const float currentTime = glfwGetTime();
+            deltaTime = currentTime - lastFrame;
+            lastFrame = currentTime;
+            
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
             if (currentTest)
             {
-                currentTest->OnUpdate(0.0f, window);
+                currentTest->OnUpdate(deltaTime, window);
                 currentTest->OnRender();
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-- Back"))

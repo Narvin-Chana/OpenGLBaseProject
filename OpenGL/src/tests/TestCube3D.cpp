@@ -103,19 +103,19 @@ void test::TestCube3D::OnUpdate(float deltaTimeX, GLFWwindow* window)
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-        camera->position += camera->cameraSpeed * camera->direction;
+        camera->position += camera->cameraSpeed * camera->direction * deltaTimeX;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        camera->position -= camera->cameraSpeed * camera->direction;
+        camera->position -= camera->cameraSpeed * camera->direction * deltaTimeX;
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-        camera->position -= glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed;
+        camera->position -= glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed * deltaTimeX;
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-        camera->position += glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed;
+        camera->position += glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed * deltaTimeX;
     }
 }
 
