@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 
+class GLFWwindow;
+
 namespace test
 {
     class Test
@@ -13,7 +15,7 @@ namespace test
         Test() {}
         virtual ~Test() = default;
 
-        virtual void OnUpdate(float deltaTime)
+        virtual void OnUpdate(float deltaTime, GLFWwindow* window)
         {
         }
 

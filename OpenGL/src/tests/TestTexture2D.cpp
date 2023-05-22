@@ -47,9 +47,9 @@ namespace test
 
     TestTexture2D::~TestTexture2D() = default;
 
-    void TestTexture2D::OnUpdate(float deltaTime)
+    void TestTexture2D::OnUpdate(float deltaTime, GLFWwindow* window)
     {
-        Test::OnUpdate(deltaTime);
+        Test::OnUpdate(deltaTime, window);
     }
 
     void TestTexture2D::OnRender()

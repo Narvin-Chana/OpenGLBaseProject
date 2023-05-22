@@ -1,5 +1,6 @@
 ﻿#include "TestClearColor.h"
 
+#include "Camera.h"
 #include "Renderer.h"
 #include "imgui/imgui.h"
 
@@ -11,9 +12,9 @@ namespace test
 
     TestClearColor::~TestClearColor() = default;
 
-    void TestClearColor::OnUpdate(float deltaTime)
+    void TestClearColor::OnUpdate(float deltaTime, GLFWwindow* window)
     {
-        Test::OnUpdate(deltaTime);
+        Test::OnUpdate(deltaTime, window);
     }
 
     void TestClearColor::OnRender()

@@ -9,6 +9,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "Camera.h"
+#include "Texture.h"
+
 namespace test
 {
     class TestCube3D : public Test
@@ -16,7 +19,7 @@ namespace test
     public:
         TestCube3D();
 
-        void OnUpdate(float deltaTime) override;
+        void OnUpdate(float deltaTimeX, GLFWwindow* window) override;
         void OnRender() override;
 
     private:
@@ -25,7 +28,8 @@ namespace test
         std::unique_ptr<IndexBuffer> indexBuffer;
         std::unique_ptr<Shader> shader;
 
-        glm::mat4 projectionMatrix, view;
-        glm::vec3 translation;
+        std::unique_ptr<Camera> camera;
+        glm::mat4 projectionMatrix, viewMatrix, modelMatrix;
+        unsigned int VAO, VBO, EBO;
     };
 }

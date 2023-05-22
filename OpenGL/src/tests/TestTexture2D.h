@@ -14,7 +14,7 @@ namespace test
         TestTexture2D();
         ~TestTexture2D() override;
 
-        void OnUpdate(float deltaTime) override;
+        void OnUpdate(float deltaTime, GLFWwindow* window) override;
         void OnRender() override;
         void OnImGuiRender() override;
 

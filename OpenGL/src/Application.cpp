@@ -14,6 +14,15 @@
 #include "tests/TestCube3D.h"
 #include "tests/TestTexture2D.h"
 
+// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
+}
+
 int main()
 {
     /* Initialize the library */
@@ -35,6 +44,7 @@ int main()
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     glfwSwapInterval(1);
 
@@ -75,7 +85,7 @@ int main()
             ImGui::NewFrame();
             if (currentTest)
             {
-                currentTest->OnUpdate(0.0f);
+                currentTest->OnUpdate(0.0f, window);
                 currentTest->OnRender();
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-- Back"))
@@ -108,3 +118,4 @@ int main()
     glfwTerminate();
     return 0;
 }
+
