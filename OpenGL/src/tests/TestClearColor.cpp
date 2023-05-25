@@ -6,15 +6,15 @@
 
 namespace test
 {
-    TestClearColor::TestClearColor() : clearColor{0.2f, 0.3f, 0.8f, 1.0f}
+    TestClearColor::TestClearColor(GLFWwindow* w) : Test(w), clearColor{0.2f, 0.3f, 0.8f, 1.0f}
     {
     }
 
     TestClearColor::~TestClearColor() = default;
 
-    void TestClearColor::OnUpdate(float deltaTime, GLFWwindow* window)
+    void TestClearColor::OnUpdate(float deltaTime)
     {
-        Test::OnUpdate(deltaTime, window);
+        Test::OnUpdate(deltaTime);
     }
 
     void TestClearColor::OnRender()

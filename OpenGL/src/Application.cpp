@@ -67,9 +67,9 @@ int main()
         ImGui_ImplOpenGL3_Init();
 
         test::Test* currentTest = nullptr;
-        auto* testMenu = new test::TestMenu(currentTest);
+        auto* testMenu = new test::TestMenu(currentTest, window);
         currentTest = testMenu;
-
+        
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
         testMenu->RegisterTest<test::TestCube3D>("Cube 3D");
@@ -91,7 +91,7 @@ int main()
             ImGui::NewFrame();
             if (currentTest)
             {
-                currentTest->OnUpdate(deltaTime, window);
+                currentTest->OnUpdate(deltaTime);
                 currentTest->OnRender();
                 ImGui::Begin("Test");
                 if (currentTest != testMenu && ImGui::Button("<-- Back"))

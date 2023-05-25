@@ -1,10 +1,11 @@
 ﻿#include "Test.h"
 
+#include "Camera.h"
 #include "imgui/imgui.h"
 
 namespace test
 {
-    TestMenu::TestMenu(Test*& currentTestPointer) : currentTest(currentTestPointer)
+    TestMenu::TestMenu(Test*& currentTestPointer, GLFWwindow* w) : Test(w), currentTest(currentTestPointer)
     {
     }
 
@@ -16,7 +17,7 @@ namespace test
         {
             if (ImGui::Button(test.first.c_str()))
             {
-                currentTest = test.second();
+                currentTest = test.second(window);
             }
         }
     }

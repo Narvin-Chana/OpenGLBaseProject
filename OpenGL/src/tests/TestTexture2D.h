@@ -11,10 +11,10 @@ namespace test
     class TestTexture2D : public Test
     {
     public:
-        TestTexture2D();
+        TestTexture2D(GLFWwindow* w);
         ~TestTexture2D() override;
 
-        void OnUpdate(float deltaTime, GLFWwindow* window) override;
+        void OnUpdate(float deltaTime) override;
         void OnRender() override;
         void OnImGuiRender() override;
 

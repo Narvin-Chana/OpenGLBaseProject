@@ -6,14 +6,14 @@ namespace test
     class TestClearColor : public Test
     {
     public:
-        TestClearColor();
+        TestClearColor(GLFWwindow* w);
         ~TestClearColor() override;
 
-        void OnUpdate(float deltaTime, GLFWwindow* window) override;
+        void OnUpdate(float deltaTime) override;
         void OnRender() override;
         void OnImGuiRender() override;
+
     private:
         float clearColor[4];
     };
-    
 }

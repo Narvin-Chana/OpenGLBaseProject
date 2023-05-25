@@ -17,9 +17,9 @@ namespace test
     class TestCube3D : public Test
     {
     public:
-        TestCube3D();
+        TestCube3D(GLFWwindow* w);
 
-        void OnUpdate(float deltaTimeX, GLFWwindow* window) override;
+        void OnUpdate(float deltaTime) override;
         void OnRender() override;
 
     private:

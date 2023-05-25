@@ -1,7 +1,7 @@
 ﻿#include "TestCube3D.h"
 #include "VertexBufferLayout.h"
 
-test::TestCube3D::TestCube3D()
+test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
 {
     projectionMatrix =
         glm::perspective(glm::radians(45.0f), (float)(960.0f / 540.0f), 0.1f, 100.0f);
@@ -10,50 +10,50 @@ test::TestCube3D::TestCube3D()
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::rotate(modelMatrix, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-    camera = std::make_unique<Camera>();
-    
+    camera = std::make_unique<Camera>(window);
+
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        -0.5f, 0.5f, -0.5f,
         -0.5f, -0.5f, -0.5f,
 
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, 0.5f, 0.5f,
+        0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, -0.5f, 0.5f,
 
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, -0.5f,
         -0.5f, -0.5f, -0.5f,
         -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
 
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
+        0.5f, 0.5f, 0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, 0.5f, 0.5f,
 
         -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        -0.5f, -0.5f, 0.5f,
         -0.5f, -0.5f, -0.5f,
 
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
+        -0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, 0.5f,
+        0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, -0.5f,
     };
 
     // unsigned int indices[] = {
@@ -91,32 +91,16 @@ test::TestCube3D::TestCube3D()
     // Set the vertex attribute pointers (defines what each index in the VBO actually means)
     GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0))
     GLCall(glEnableVertexAttribArray(0))
-    
+
     // Create and Bind FragmentShader & VertexShader
     shader = std::make_unique<Shader>("res\\shaders\\NoTex.vs", "res\\shaders\\NoTex.fs");
 }
 
-void test::TestCube3D::OnUpdate(float deltaTimeX, GLFWwindow* window)
+void test::TestCube3D::OnUpdate(float deltaTime)
 {
-    Test::OnUpdate(deltaTimeX, window);
+    Test::OnUpdate(deltaTime);
 
-    
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    {
-        camera->position += camera->cameraSpeed * camera->direction * deltaTimeX;
-    }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    {
-        camera->position -= camera->cameraSpeed * camera->direction * deltaTimeX;
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    {
-        camera->position -= glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed * deltaTimeX;
-    }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    {
-        camera->position += glm::normalize(glm::cross(camera->direction, camera->up)) * camera->cameraSpeed * deltaTimeX;
-    }
+    camera->OnUpdate(deltaTime, window);
 }
 
 void test::TestCube3D::OnRender()
@@ -125,7 +109,7 @@ void test::TestCube3D::OnRender()
 
     modelMatrix = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
     viewMatrix = camera->LookAt(camera->position + camera->direction);
-    
+
     shader->Bind();
     shader->SetUniformMat4f("projection", projectionMatrix);
     shader->SetUniformMat4f("view", viewMatrix);
