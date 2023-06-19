@@ -14,7 +14,7 @@ public:
     glm::mat4 LookAt(const glm::vec3& target);
     static void mouse_callback(GLFWwindow* window, double xPos, double yPos);
     void OnUpdate(float deltaTimeX, GLFWwindow* window);
-
 private:
     float cameraSpeed = 3.5f;
+    bool isMiddleMouseButtonPressed = false;
 };

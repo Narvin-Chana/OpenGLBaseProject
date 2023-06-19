@@ -94,10 +94,12 @@ int main()
                 currentTest->OnUpdate(deltaTime);
                 currentTest->OnRender();
                 ImGui::Begin("Test");
-                if (currentTest != testMenu && ImGui::Button("<-- Back"))
+                if (currentTest != testMenu && (ImGui::Button("<-- Back") || glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS))
                 {
                     delete currentTest;
                     currentTest = testMenu;
+                    // Reset cursor to normal
+                    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
                 }
                 currentTest->OnImGuiRender();
                 ImGui::End();

@@ -1,5 +1,6 @@
 ﻿#include "TestCube3D.h"
 #include "VertexBufferLayout.h"
+#include "imgui/imgui.h"
 
 test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
 {
@@ -118,4 +119,13 @@ void test::TestCube3D::OnRender()
     //GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO))
     GLCall(glBindVertexArray(VAO))
     GLCall(glDrawArrays(GL_TRIANGLES, 0, 36))
+}
+
+void test::TestCube3D::OnImGuiRender()
+{
+    Test::OnImGuiRender();
+
+    ImGui::Text("Cube3D Test: Press WASD to move the camera around.");
+    ImGui::Text("Camera Position: (%f, %f, %f)", camera->position.x, camera->position.y, camera->position.z);
+    ImGui::Text("Camera Direction: (%f, %f, %f)", camera->direction.x, camera->direction.y, camera->direction.z);
 }
