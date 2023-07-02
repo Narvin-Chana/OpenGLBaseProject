@@ -6,12 +6,12 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
 {
     projectionMatrix =
         glm::perspective(glm::radians(45.0f), (float)(960.0f / 540.0f), 0.1f, 100.0f);
-    viewMatrix = glm::mat4(1.0f);
-    viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f));
+
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::rotate(modelMatrix, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
     camera = std::make_unique<Camera>(window);
+    camera->position = glm::vec3(0.0f, 0.0f, -3.0f);
 
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,
@@ -65,7 +65,7 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
     GLCall(glGenVertexArrays(1, &VAO))
 
     GLCall(glGenBuffers(1, &VBO))
-    
+
     // Preparation and sending of data to GPU
     // Bind VAO
     GLCall(glBindVertexArray(VAO))
@@ -73,7 +73,7 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
     // Bind VBO
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO))
     GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW))
-    
+
     // Set the vertex attribute pointers (defines what each index in the VBO actually means)
     GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0))
     GLCall(glEnableVertexAttribArray(0))
@@ -110,7 +110,8 @@ void test::TestCube3D::OnImGuiRender()
 {
     Test::OnImGuiRender();
 
-    ImGui::Text("Cube3D Test: Press WASD to move the camera around.");
+    ImGui::Text(
+        "Cube3D Test: Press WASD to move the camera around.\nUse MOUSE3 to activate mouse look.\nSpace to move up and CTRL to move down.");
     ImGui::Text("Camera Position: (%f, %f, %f)", camera->position.x, camera->position.y, camera->position.z);
     ImGui::Text("Camera Direction: (%f, %f, %f)", camera->direction.x, camera->direction.y, camera->direction.z);
 }

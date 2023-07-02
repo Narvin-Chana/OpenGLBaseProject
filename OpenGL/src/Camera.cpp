@@ -22,8 +22,13 @@ Camera::Camera(GLFWwindow* window)
     up = glm::normalize(glm::cross(direction, right));
 
     cameraInstance = this;
+    previouslyUsedWindow = window;
     glfwSetCursorPosCallback(window, mouse_callback);
-    
+}
+
+Camera::~Camera()
+{
+    glfwSetInputMode(previouslyUsedWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 glm::mat4 Camera::LookAt(const glm::vec3& target)
@@ -33,6 +38,9 @@ glm::mat4 Camera::LookAt(const glm::vec3& target)
 
 void Camera::OnUpdate(float deltaTimeX, GLFWwindow* window)
 {
+    // Remember window for resetting mouse functions when the user exists the test.
+    previouslyUsedWindow = window;
+
     ImGuiIO& io = ImGui::GetIO();
     io.MouseDown[0] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
     io.MouseDown[1] = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS;
@@ -110,7 +118,6 @@ void Camera::mouse_callback(GLFWwindow* window, double xPos, double yPos)
     if (!mouseLook)
         return;
 
-    // Explain the following line
     ImGui_ImplGlfw_MouseButtonCallback(window, GLFW_MOUSE_BUTTON_MIDDLE, GLFW_PRESS, 0);
 
     if (firstMouse)
