@@ -57,15 +57,6 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
         -0.5f, 0.5f, -0.5f,
     };
 
-    // unsigned int indices[] = {
-    //     0, 1, 2, 3, // ABCD
-    //     0, 1, 4, 5, // ABFE
-    //     0, 3, 4, 7, // DAEH
-    //     2, 3, 6, 7, // CDHG
-    //     1, 2, 5, 6, // BCGF
-    //     4, 5, 6, 7, // FGHE
-    // };
-
     GLCall(glEnable(GL_BLEND))
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA))
     GLCall(glEnable(GL_DEPTH_TEST))
@@ -74,9 +65,7 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
     GLCall(glGenVertexArrays(1, &VAO))
 
     GLCall(glGenBuffers(1, &VBO))
-
-    // GLCall(glGenBuffers(1, &EBO))
-
+    
     // Preparation and sending of data to GPU
     // Bind VAO
     GLCall(glBindVertexArray(VAO))
@@ -84,11 +73,7 @@ test::TestCube3D::TestCube3D(GLFWwindow* w) : Test(w)
     // Bind VBO
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO))
     GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW))
-
-    // Bind EBO
-    // GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO))
-    // GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW))
-
+    
     // Set the vertex attribute pointers (defines what each index in the VBO actually means)
     GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0))
     GLCall(glEnableVertexAttribArray(0))
